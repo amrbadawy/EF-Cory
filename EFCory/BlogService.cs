@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using UPD.EntityFramework;
 using System.Linq;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using System;
 
 namespace EFCory
 {
@@ -23,13 +21,13 @@ namespace EFCory
 
         public async Task Test()
         {
-            //await ResetDatabase();
-
+            //await _dbContext.ResetDatabase();
             //await InitData();
 
             //await AddPostTags();
 
-            var tags = new List<Tag> { Tag.CSharp_100, Tag.Architecture_106, Tag.DDD_105 };
+            var tags = new List<Tag> { Tag.Queue_102, Tag.EfCore_101, Tag.DDD_105 };
+            //var tags = new List<Tag> { Tag.CSharp_100, Tag.Architecture_106, Tag.DDD_105 };
             await SetPostTags(1, tags);
         }
 
@@ -86,8 +84,7 @@ namespace EFCory
             //post.Tags.Add(Tag.Queue);
             //post.Tags.Add(Tag.Sql);
 
-            DisplayStates();
-            await _dbContext.SaveChangesAsync();
+            await SaveChangesAsync();
         }
 
         public async Task SetPostTags(int postId, List<Tag> tags)
@@ -100,28 +97,25 @@ namespace EFCory
             var deletedItems = post.Tags.Except(tags).ToList();
             deletedItems.ForEach(item => post.Tags.Remove(item));
 
-            var newTags = await _dbContext.Tags.Where(t => tags.Contains(t)).ToListAsync();
-            var addedItems = newTags.Except(post.Tags).ToList();
-            addedItems.ForEach(item => post.Tags.Add(item));
+            //var newTags = await _dbContext.Tags.Where(t => tags.Contains(t)).ToListAsync();
+            //var addedItems = newTags.Except(post.Tags).ToList();
+            //addedItems.ForEach(item => post.Tags.Add(item));
 
-            DisplayStates();
-            await _dbContext.SaveChangesAsync();
-        }
-
-        private void DisplayStates()
-        {
-            var entries = _dbContext.ChangeTracker.Entries();
-            foreach (var entry in entries)
+            var addedItems = tags.Except(post.Tags).ToList();
+            addedItems.ForEach(item =>
             {
-                //Console.WriteLine($"Entity: {entry.Entity.GetType().Name}, State: { entry.State}");
-                Console.WriteLine($"Entity: {entry.Entity.ToString()}, State: { entry.State}");
-            }
+                _dbContext.Attach(item);
+                //_dbContext.Entry(item).State = EntityState.Unchanged;
+                post.Tags.Add(item);
+            });
+
+            await SaveChangesAsync();
         }
 
-        private async Task ResetDatabase()
+        private async Task SaveChangesAsync()
         {
-            await _dbContext.Database.EnsureDeletedAsync();
-            await _dbContext.Database.EnsureCreatedAsync();
+            _dbContext.DisplayChanges();
+            await _dbContext.SaveChangesAsync();
         }
     }
 }
