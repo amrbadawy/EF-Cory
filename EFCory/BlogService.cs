@@ -40,21 +40,21 @@ namespace EFCory
 
             var post1 = new Post
             {
-                Title = "Title #01",
+                Title = "Post Title #01",
                 Content = "111 -Content for Post",
                 Tags = { Tag.CSharp_100, Tag.EfCore_101, Tag.Queue_102 }
             };
 
             var post2 = new Post
             {
-                Title = "Title #02",
+                Title = "Post Title #02",
                 Content = "111 -Content for Post",
                 Tags = { Tag.EfCore_101, Tag.Queue_102, Tag.Sql_103 }
             };
 
             var post3 = new Post
             {
-                Title = "Title #03",
+                Title = "Post Title #03",
                 Content = "111 -Content for Post",
                 Tags = { Tag.EfCore_101, Tag.Sql_103, Tag.FSharp_104 }
             };
