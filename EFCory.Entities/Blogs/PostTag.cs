@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace EFCory.Entities
+namespace EFCory.Entities.Blogs
 {
     public class PostTag
     {

@@ -1,4 +1,4 @@
-﻿using EFCory.Entities;
+﻿using EFCory.Entities.Blogs;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 

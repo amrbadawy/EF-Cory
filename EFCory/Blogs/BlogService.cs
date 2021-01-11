@@ -1,11 +1,11 @@
-﻿using EFCory.Entities;
+﻿using EFCory.Entities.Blogs;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UPD.EntityFramework;
 using System.Linq;
 
-namespace EFCory
+namespace EFCory.Blogs
 {
     public class BlogService : IBlogService
     {

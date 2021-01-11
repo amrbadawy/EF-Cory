@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace EFCory.Entities
+namespace EFCory.Entities.Blogs
 {
     public class Post : Entity<int>
     {

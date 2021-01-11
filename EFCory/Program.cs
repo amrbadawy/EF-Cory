@@ -21,7 +21,7 @@ namespace EFCory
 
             try
             {
-                var blogService = services.GetRequiredService<IBlogService>();
+                var blogService = services.GetRequiredService<Blogs.IBlogService > ();
                 await blogService.Test();
 
                 Console.WriteLine("Done");
@@ -48,7 +48,7 @@ namespace EFCory
                 {
                     services.AddLogging(configure => configure.AddConsole());
                     services.AddDbContext<DatabaseContext>(options => options.ConfigDatabaseContext(connectionString));
-                    services.AddSingleton<IBlogService, BlogService>();
+                    services.AddSingleton<Blogs.IBlogService, Blogs.BlogService>();
                 });
 
             return builder;

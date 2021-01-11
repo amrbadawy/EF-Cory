@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace EFCory
+namespace EFCory.Blogs
 {
     public interface IBlogService
     {

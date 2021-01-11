@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using EFCory.Entities;
+using EFCory.Entities.Blogs;
 
 namespace UPD.EntityFramework
 {
