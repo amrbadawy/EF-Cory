@@ -21,18 +21,18 @@ namespace UPD.EntityFramework.Configurations
             builder.HasMany(r => r.Tags)
                .WithMany(p => p.Posts)
                .UsingEntity<PostTag>(
-                    rp => rp.ToTable(TableName.PostTags, SchemaName.AMR)
+                    e => e.ToTable(TableName.PostTags, SchemaName.AMR)
                         .HasOne(rp => rp.Tag)
                         .WithMany()
                         .HasForeignKey(rp => rp.TagId),
-                    rp => rp
+                    e => e
                         .HasOne(rp => rp.Post)
                         .WithMany()
                         .HasForeignKey(rp => rp.PostId),
-                    rp =>
+                    e =>
                     {
-                        rp.Property(rp => rp.CreatedAt).HasDefaultCurrentDate();
-                        rp.HasKey(rp => new { rp.PostId, rp.TagId });
+                        e.Property(rp => rp.CreatedAt).HasDefaultCurrentDate();
+                        e.HasKey(rp => new { rp.PostId, rp.TagId });
                     });
         }
     }
