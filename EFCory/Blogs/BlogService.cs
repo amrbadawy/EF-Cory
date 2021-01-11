@@ -7,15 +7,11 @@ using System.Linq;
 
 namespace EFCory.Blogs
 {
-    public class BlogService : IBlogService
+    public class BlogService : AppService, IBlogService
     {
         #region • Init •
 
-        private readonly DatabaseContext _dbContext;
-        public BlogService(DatabaseContext databaseContext)
-        {
-            _dbContext = databaseContext;
-        }
+        public BlogService(DatabaseContext databaseContext) : base(databaseContext) { }
 
         #endregion
 
@@ -33,8 +29,8 @@ namespace EFCory.Blogs
 
         public async Task InitData()
         {
-            _dbContext.Tags.AddRange(Tag.CSharp_100, Tag.EfCore_101, Tag.Queue_102, Tag.Sql_103, Tag.FSharp_104, Tag.DDD_105, Tag.Architecture_106);
-            await _dbContext.SaveChangesAsync();
+            _db.Tags.AddRange(Tag.CSharp_100, Tag.EfCore_101, Tag.Queue_102, Tag.Sql_103, Tag.FSharp_104, Tag.DDD_105, Tag.Architecture_106);
+            await SaveChangesAsync();
 
             var post1 = new Post
             {
@@ -63,22 +59,22 @@ namespace EFCory.Blogs
                 Posts = { post1, post2, post3 }
             };
 
-            _dbContext.Blogs.Add(blog);
+            _db.Blogs.Add(blog);
 
-            await _dbContext.SaveChangesAsync();
+            await SaveChangesAsync();
         }
 
         public async Task AddPostTags()
         {
-            var post = await _dbContext.Posts
+            var post = await _db.Posts
                 .Where(p => p.Id == 1)
                 .Include(p => p.Tags)
                 .FirstOrDefaultAsync();
 
-            var queueTag = await _dbContext.Tags.FindAsync(Tag.Queue_102.Id);
+            var queueTag = await _db.Tags.FindAsync(Tag.Queue_102.Id);
             post.Tags.Add(queueTag);
 
-            var sqlTag = await _dbContext.Tags.FindAsync(Tag.Sql_103.Id);
+            var sqlTag = await _db.Tags.FindAsync(Tag.Sql_103.Id);
             post.Tags.Add(sqlTag);
 
             //post.Tags.Add(Tag.Queue);
@@ -89,7 +85,7 @@ namespace EFCory.Blogs
 
         public async Task SetPostTags(int postId, List<Tag> tags)
         {
-            var post = await _dbContext.Posts
+            var post = await _db.Posts
                 .Where(p => p.Id == postId)
                 .Include(p => p.Tags)
                 .FirstOrDefaultAsync();
@@ -104,18 +100,12 @@ namespace EFCory.Blogs
             var addedItems = tags.Except(post.Tags).ToList();
             addedItems.ForEach(item =>
             {
-                _dbContext.Attach(item);
+                _db.Attach(item);
                 //_dbContext.Entry(item).State = EntityState.Unchanged;
                 post.Tags.Add(item);
             });
 
             await SaveChangesAsync();
-        }
-
-        private async Task SaveChangesAsync()
-        {
-            _dbContext.DisplayChanges();
-            await _dbContext.SaveChangesAsync();
         }
     }
 }
