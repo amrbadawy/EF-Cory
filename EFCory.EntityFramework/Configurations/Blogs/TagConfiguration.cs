@@ -8,7 +8,7 @@ namespace UPD.EntityFramework.Configurations
     {
         public void Configure(EntityTypeBuilder<Tag> builder)
         {
-            builder.ToTable(TableName.Tags, SchemaName.AMR);
+            builder.ToTable(TableName.Tags, SchemaName.BLOG);
             builder.HasKey(e => e.Id);
             builder.Property(e => e.Id).ValueGeneratedNever();
 

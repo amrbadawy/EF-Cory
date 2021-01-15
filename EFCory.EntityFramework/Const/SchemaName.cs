@@ -2,6 +2,7 @@
 {
     public static class SchemaName
     {
-        public const string AMR = "AMR";
+        public const string BLOG = "BLOG";
+        public const string KPI = "KPI";
     }
 }

@@ -8,7 +8,7 @@ namespace UPD.EntityFramework.Configurations
     {
         public void Configure(EntityTypeBuilder<Post> builder)
         {
-            builder.ToTable(TableName.Posts, SchemaName.AMR);
+            builder.ToTable(TableName.Posts, SchemaName.BLOG);
             builder.HasKey(e => e.Id);
 
             builder.HasIndex(e => e.Title).IsUnique();
@@ -21,7 +21,7 @@ namespace UPD.EntityFramework.Configurations
             builder.HasMany(r => r.Tags)
                .WithMany(p => p.Posts)
                .UsingEntity<PostTag>(
-                    e => e.ToTable(TableName.PostTags, SchemaName.AMR)
+                    e => e.ToTable(TableName.PostTags, SchemaName.BLOG)
                         .HasOne(rp => rp.Tag)
                         .WithMany()
                         .HasForeignKey(rp => rp.TagId),

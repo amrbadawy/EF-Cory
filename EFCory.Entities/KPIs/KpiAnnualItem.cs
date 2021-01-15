@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace EFCory.Entities.KPIs
 {
@@ -8,6 +9,6 @@ namespace EFCory.Entities.KPIs
         public string Description { get; set; }
 
         public ICollection<KpiItem> KpiItems { get; set; } = new List<KpiItem>();
+        public DateTime CreatedAt { get; set; }
     }
-
 }

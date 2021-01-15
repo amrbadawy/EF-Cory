@@ -1,15 +1,17 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace EFCory.Entities.KPIs
 {
-    public class KPI : Entity<int>
+    public class KPI
     {
         public int Code { get; set; }
         public string Name { get; set; }
         public string ShortName { get; set; }
+        public DateTime CreatedAt { get; set; }
 
         #region • Data •
-        
+
         public static readonly KPI Profit = new KPI
         {
             Code = 10_100,

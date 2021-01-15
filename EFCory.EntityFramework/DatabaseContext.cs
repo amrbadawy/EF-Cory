@@ -6,6 +6,10 @@ namespace UPD.EntityFramework
 {
     public class DatabaseContext : DbContext
     {
+        public DatabaseContext()
+        {
+
+        }
         public DatabaseContext(DbContextOptions options) : base(options) { }
 
         public virtual DbSet<Blog> Blogs { get; set; }

@@ -1,7 +1,7 @@
-﻿SELECT * FROM [AMR].[Blogs]
-SELECT * FROM [AMR].[Posts]
-SELECT * FROM [AMR].[Tags]
---SELECT * FROM [AMR].[PostTags]
-SELECT * FROM [AMR].[PostTags] WHERE PostId = 1 Order by CreatedAt
+﻿SELECT * FROM [BLOG].[Blogs]
+SELECT * FROM [BLOG].[Posts]
+SELECT * FROM [BLOG].[Tags]
+--SELECT * FROM [BLOG].[PostTags]
+SELECT * FROM [BLOG].[PostTags] WHERE PostId = 1 Order by CreatedAt
 
---DELETE FROM [AMR].[PostTags] where PostId = 1 and TagId = 103
+--DELETE FROM [BLOG].[PostTags] where PostId = 1 and TagId = 103

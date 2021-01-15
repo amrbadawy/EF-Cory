@@ -8,7 +8,7 @@ namespace UPD.EntityFramework.Configurations
     {
         public void Configure(EntityTypeBuilder<Blog> builder)
         {
-            builder.ToTable(TableName.Blogs, SchemaName.AMR);
+            builder.ToTable(TableName.Blogs, SchemaName.BLOG);
             builder.HasKey(e => e.Id);
 
             builder.HasIndex(e => e.Name).IsUnique();

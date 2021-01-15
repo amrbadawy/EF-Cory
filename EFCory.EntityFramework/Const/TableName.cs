@@ -7,5 +7,9 @@
         public const string Tags = "Tags";
 
         public const string PostTags = "PostTags";
+
+        public const string KPIs = "KPIs";
+        public const string KpiAnnualItems = "KpiAnnualItems";
+        public const string KpiItems = "KpiItems";
     }
 }
